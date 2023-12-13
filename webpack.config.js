@@ -6,7 +6,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/, // Match .ts or .tsx files
+        test: /\.js$|jsx/,
         use: [
           {
             loader: 'babel-loader',
