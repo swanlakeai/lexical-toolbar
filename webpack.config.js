@@ -6,16 +6,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$|jsx/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env', '@babel/preset-react'],
-            },
-          },
-          'ts-loader',
-        ],
+        test: /\.tsx?$/,
+        use: 'ts-loader',
         exclude: /node_modules/,
       },
     ],
