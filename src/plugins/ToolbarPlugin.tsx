@@ -1,12 +1,5 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
 
-import type {InsertImagePayload} from './ImagesPlugin';
+// import type {InsertImagePayload} from './ImagesPlugin';
 import type {
   GridSelection,
   LexicalEditor,
@@ -76,8 +69,8 @@ import {createPortal} from 'react-dom';
 import {IS_APPLE} from '../shared/src/environment';
 
 import useModal from '../hooks/useModal';
-import catTypingGif from '../images/cat-typing.gif';
-import yellowFlowerImage from '../images/yellow-flower.jpg';
+// import catTypingGif from '../images/cat-typing.gif';
+// import yellowFlowerImage from '../images/yellow-flower.jpg';
 import {$createStickyNode} from '../nodes/StickyNode';
 import Button from '../ui/Button';
 import ColorPicker from '../ui/ColorPicker';
@@ -224,7 +217,7 @@ function FloatingLinkEditor({editor}: {editor: LexicalEditor}): JSX.Element {
       }
 
       positionEditorElement(editorElem, rect, rootElement);
-      setLastSelection(selection);
+      // setLastSelection(selection);
     } else if (!activeElement || activeElement.className !== 'link-input') {
       if (rootElement !== null) {
         positionEditorElement(editorElem, null, rootElement);
@@ -329,139 +322,139 @@ function FloatingLinkEditor({editor}: {editor: LexicalEditor}): JSX.Element {
   );
 }
 
-function InsertImageUriDialogBody({
-  onClick,
-}: {
-  onClick: (payload: InsertImagePayload) => void;
-}) {
-  const [src, setSrc] = useState('');
-  const [altText, setAltText] = useState('');
+// function InsertImageUriDialogBody({
+//   onClick,
+// }: {
+//   onClick: (payload: InsertImagePayload) => void;
+// }) {
+//   const [src, setSrc] = useState('');
+//   const [altText, setAltText] = useState('');
 
-  const isDisabled = src === '';
+//   const isDisabled = src === '';
 
-  return (
-    <>
-      <TextInput
-        label="Image URL"
-        placeholder="i.e. https://source.unsplash.com/random"
-        onChange={setSrc}
-        value={src}
-        data-test-id="image-modal-url-input"
-      />
-      <TextInput
-        label="Alt Text"
-        placeholder="Random unsplash image"
-        onChange={setAltText}
-        value={altText}
-        data-test-id="image-modal-alt-text-input"
-      />
-      <div className="ToolbarPlugin__dialogActions">
-        <Button
-          data-test-id="image-modal-confirm-btn"
-          disabled={isDisabled}
-          onClick={() => onClick({altText, src})}>
-          Confirm
-        </Button>
-      </div>
-    </>
-  );
-}
+//   return (
+//     <>
+//       <TextInput
+//         label="Image URL"
+//         placeholder="i.e. https://source.unsplash.com/random"
+//         onChange={setSrc}
+//         value={src}
+//         data-test-id="image-modal-url-input"
+//       />
+//       <TextInput
+//         label="Alt Text"
+//         placeholder="Random unsplash image"
+//         onChange={setAltText}
+//         value={altText}
+//         data-test-id="image-modal-alt-text-input"
+//       />
+//       <div className="ToolbarPlugin__dialogActions">
+//         <Button
+//           data-test-id="image-modal-confirm-btn"
+//           disabled={isDisabled}
+//           onClick={() => onClick({altText, src})}>
+//           Confirm
+//         </Button>
+//       </div>
+//     </>
+//   );
+// }
 
-function InsertImageUploadedDialogBody({
-  onClick,
-}: {
-  onClick: (payload: InsertImagePayload) => void;
-}) {
-  const [src, setSrc] = useState('');
-  const [altText, setAltText] = useState('');
+// function InsertImageUploadedDialogBody({
+//   onClick,
+// }: {
+//   onClick: (payload: InsertImagePayload) => void;
+// }) {
+//   const [src, setSrc] = useState('');
+//   const [altText, setAltText] = useState('');
 
-  const isDisabled = src === '';
+//   const isDisabled = src === '';
 
-  const loadImage = (files: FileList | null) => {
-    const reader = new FileReader();
-    reader.onload = function () {
-      if (typeof reader.result === 'string') {
-        setSrc(reader.result);
-      }
-      return '';
-    };
-    if (files !== null) {
-      reader.readAsDataURL(files[0]);
-    }
-  };
+//   const loadImage = (files: FileList | null) => {
+//     const reader = new FileReader();
+//     reader.onload = function () {
+//       if (typeof reader.result === 'string') {
+//         setSrc(reader.result);
+//       }
+//       return '';
+//     };
+//     if (files !== null) {
+//       reader.readAsDataURL(files[0]);
+//     }
+//   };
 
-  return (
-    <>
-      <FileInput
-        label="Image Upload"
-        onChange={loadImage}
-        accept="image/*"
-        data-test-id="image-modal-file-upload"
-      />
-      <TextInput
-        label="Alt Text"
-        placeholder="Descriptive alternative text"
-        onChange={setAltText}
-        value={altText}
-        data-test-id="image-modal-alt-text-input"
-      />
-      <div className="ToolbarPlugin__dialogActions">
-        <Button
-          data-test-id="image-modal-file-upload-btn"
-          disabled={isDisabled}
-          onClick={() => onClick({altText, src})}>
-          Confirm
-        </Button>
-      </div>
-    </>
-  );
-}
+//   return (
+//     <>
+//       <FileInput
+//         label="Image Upload"
+//         onChange={loadImage}
+//         accept="image/*"
+//         data-test-id="image-modal-file-upload"
+//       />
+//       <TextInput
+//         label="Alt Text"
+//         placeholder="Descriptive alternative text"
+//         onChange={setAltText}
+//         value={altText}
+//         data-test-id="image-modal-alt-text-input"
+//       />
+//       <div className="ToolbarPlugin__dialogActions">
+//         <Button
+//           data-test-id="image-modal-file-upload-btn"
+//           disabled={isDisabled}
+//           onClick={() => onClick({altText, src})}>
+//           Confirm
+//         </Button>
+//       </div>
+//     </>
+//   );
+// }
 
-function InsertImageDialog({
-  activeEditor,
-  onClose,
-}: {
-  activeEditor: LexicalEditor;
-  onClose: () => void;
-}): JSX.Element {
-  const [mode, setMode] = useState<null | 'url' | 'file'>(null);
+// function InsertImageDialog({
+//   activeEditor,
+//   onClose,
+// }: {
+//   activeEditor: LexicalEditor;
+//   onClose: () => void;
+// }): JSX.Element {
+//   const [mode, setMode] = useState<null | 'url' | 'file'>(null);
 
-  const onClick = (payload: InsertImagePayload) => {
-    activeEditor.dispatchCommand(INSERT_IMAGE_COMMAND, payload);
-    onClose();
-  };
+//   const onClick = (payload: InsertImagePayload) => {
+//     activeEditor.dispatchCommand(INSERT_IMAGE_COMMAND, payload);
+//     onClose();
+//   };
 
-  return (
-    <>
-      {!mode && (
-        <div className="ToolbarPlugin__dialogButtonsList">
-          <Button
-            data-test-id="image-modal-option-sample"
-            onClick={() =>
-              onClick({
-                altText: 'Yellow flower in tilt shift lens',
-                src: yellowFlowerImage,
-              })
-            }>
-            Sample
-          </Button>
-          <Button
-            data-test-id="image-modal-option-url"
-            onClick={() => setMode('url')}>
-            URL
-          </Button>
-          <Button
-            data-test-id="image-modal-option-file"
-            onClick={() => setMode('file')}>
-            File
-          </Button>
-        </div>
-      )}
-      {mode === 'url' && <InsertImageUriDialogBody onClick={onClick} />}
-      {mode === 'file' && <InsertImageUploadedDialogBody onClick={onClick} />}
-    </>
-  );
-}
+//   return (
+//     <>
+//       {!mode && (
+//         <div className="ToolbarPlugin__dialogButtonsList">
+//           <Button
+//             data-test-id="image-modal-option-sample"
+//             onClick={() =>
+//               onClick({
+//                 altText: 'Yellow flower in tilt shift lens',
+//                 src: yellowFlowerImage,
+//               })
+//             }>
+//             Sample
+//           </Button>
+//           <Button
+//             data-test-id="image-modal-option-url"
+//             onClick={() => setMode('url')}>
+//             URL
+//           </Button>
+//           <Button
+//             data-test-id="image-modal-option-file"
+//             onClick={() => setMode('file')}>
+//             File
+//           </Button>
+//         </div>
+//       )}
+//       {mode === 'url' && <InsertImageUriDialogBody onClick={onClick} />}
+//       {mode === 'file' && <InsertImageUploadedDialogBody onClick={onClick} />}
+//     </>
+//   );
+// }
 
 function InsertTableDialog({
   activeEditor,
@@ -1026,9 +1019,9 @@ export default function ToolbarPlugin(): JSX.Element {
     },
     [activeEditor, selectedElementKey],
   );
-  const insertGifOnClick = (payload: InsertImagePayload) => {
-    activeEditor.dispatchCommand(INSERT_IMAGE_COMMAND, payload);
-  };
+  // const insertGifOnClick = (payload: InsertImagePayload) => {
+  //   activeEditor.dispatchCommand(INSERT_IMAGE_COMMAND, payload);
+  // };
 
   return (
     <div className="toolbar">
@@ -1246,30 +1239,8 @@ export default function ToolbarPlugin(): JSX.Element {
               <i className="icon horizontal-rule" />
               <span className="text">Horizontal Rule</span>
             </DropDownItem>
-            <DropDownItem
-              onClick={() => {
-                showModal('Insert Image', (onClose) => (
-                  <InsertImageDialog
-                    activeEditor={activeEditor}
-                    onClose={onClose}
-                  />
-                ));
-              }}
-              className="item">
-              <i className="icon image" />
-              <span className="text">Image</span>
-            </DropDownItem>
-            <DropDownItem
-              onClick={() =>
-                insertGifOnClick({
-                  altText: 'Cat typing on a laptop',
-                  src: catTypingGif,
-                })
-              }
-              className="item">
-              <i className="icon gif" />
-              <span className="text">GIF</span>
-            </DropDownItem>
+          
+        
             <DropDownItem
               onClick={() => {
                 activeEditor.dispatchCommand(
