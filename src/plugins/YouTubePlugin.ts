@@ -11,6 +11,7 @@ import {
   $createParagraphNode,
   $getRoot,
   $getSelection,
+  // $isGridSelection,
   $isNodeSelection,
   $isRangeSelection,
   COMMAND_PRIORITY_EDITOR,
@@ -36,18 +37,18 @@ export default function YouTubePlugin(): JSX.Element | null {
       (payload) => {
         const selection = $getSelection();
         const youTubeNode = $createYouTubeNode(payload);
-        if ($isRangeSelection(selection)) {
-          const focusNode = selection.focus.getNode();
-          focusNode.getTopLevelElementOrThrow().insertAfter(youTubeNode);
-        } else if ($isNodeSelection(selection)) {
-          const nodes = selection.getNodes();
-          nodes[nodes.length - 1]
-            .getTopLevelElementOrThrow()
-            .insertAfter(youTubeNode);
-        } else {
-          const root = $getRoot();
-          root.append(youTubeNode);
-        }
+        // if ($isRangeSelection(selection)) {
+        //   const focusNode = selection.focus.getNode();
+        //   focusNode.getTopLevelElementOrThrow().insertAfter(youTubeNode);
+        // } else if ($isNodeSelection(selection) || $isGridSelection(selection)) {
+        //   const nodes = selection.getNodes();
+        //   nodes[nodes.length - 1]
+        //     .getTopLevelElementOrThrow()
+        //     .insertAfter(youTubeNode);
+        // } else {
+        //   const root = $getRoot();
+        //   root.append(youTubeNode);
+        // }
         const paragraphNode = $createParagraphNode();
         youTubeNode.insertAfter(paragraphNode);
         paragraphNode.select();

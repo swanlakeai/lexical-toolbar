@@ -14,8 +14,6 @@ import {
   $getTableColumnIndexFromTableCellNode,
   $getTableNodeFromLexicalNodeOrThrow,
   $getTableRowIndexFromTableCellNode,
-  $insertTableColumn,
-  $insertTableRow,
   $isTableCellNode,
   $isTableRowNode,
   $removeTableRowAtIndex,
@@ -70,6 +68,7 @@ function TableActionMenu({
   useEffect(() => {
     editor.getEditorState().read(() => {
       const selection = $getSelection();
+
 
     });
   }, [editor]);
@@ -144,18 +143,11 @@ function TableActionMenu({
 
         let tableRowIndex;
 
-       
+ 
 
         const grid = $getElementGridForTableNode(editor, tableNode);
 
-        $insertTableRow(
-          tableNode,
-          tableRowIndex,
-          shouldInsertAfter,
-          selectionCounts.rows,
-          grid,
-        );
-
+      
         clearTableSelection();
 
         onClose();
@@ -173,10 +165,7 @@ function TableActionMenu({
 
         let tableColumnIndex;
 
-     
-
     
-
         clearTableSelection();
 
         onClose();
@@ -295,7 +284,6 @@ function TableActionMenu({
   }, [editor, tableCellNode, clearTableSelection, onClose]);
 
   return createPortal(
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
       className="dropdown"
       ref={dropDownRef}

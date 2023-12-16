@@ -1,6 +1,6 @@
 import type { Spread } from 'lexical';
 import { DOMConversionMap, DOMExportOutput, EditorConfig, LexicalNode, NodeKey, SerializedTextNode, TextNode } from 'lexical';
-export type SerializedMentionNode = Spread<{
+export declare type SerializedMentionNode = Spread<{
     mentionName: string;
     type: 'mention';
     version: 1;

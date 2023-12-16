@@ -1,6 +1,5 @@
 /// <reference types="react" />
-import './EquationEditor.css';
-type BaseEquationEditorProps = {
+declare type BaseEquationEditorProps = {
     equation: string;
     inline: boolean;
     inputRef: {

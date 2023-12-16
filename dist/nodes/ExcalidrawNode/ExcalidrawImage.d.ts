@@ -1,8 +1,8 @@
 /// <reference types="react" />
 import { ExcalidrawElement, NonDeleted } from '@excalidraw/excalidraw/types/element/types';
 import { AppState } from '@excalidraw/excalidraw/types/types';
-type ImageType = 'svg' | 'canvas';
-type Props = {
+declare type ImageType = 'svg' | 'canvas';
+declare type Props = {
     appState?: Partial<Omit<AppState, 'offsetTop' | 'offsetLeft'>> | null;
     className?: string;
     elements: NonDeleted<ExcalidrawElement>[];

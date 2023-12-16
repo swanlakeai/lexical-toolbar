@@ -1,6 +1,6 @@
 import type { SettingName } from '../appSettings';
 import { ReactNode } from 'react';
-type SettingsContextShape = {
+declare type SettingsContextShape = {
     setOption: (name: SettingName, value: boolean) => void;
     settings: Record<SettingName, boolean>;
 };

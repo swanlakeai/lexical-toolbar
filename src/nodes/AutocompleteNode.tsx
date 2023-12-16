@@ -16,7 +16,7 @@ import {
 } from 'lexical';
 import * as React from 'react';
 
-import {useSharedAutocompleteContext} from '../context/SharedAutocompleteContext';
+// import {useSharedAutocompleteContext} from '../context/SharedAutocompleteContext';
 import {uuid as UUID} from '../plugins/AutocompletePlugin';
 
 export type SerializedAutocompleteNode = Spread<
@@ -86,7 +86,7 @@ export function $createAutocompleteNode(uuid: string): AutocompleteNode {
 }
 
 function AutocompleteComponent(): JSX.Element {
-  const [suggestion] = useSharedAutocompleteContext();
+  // const [suggestion] = useSharedAutocompleteContext();
   // @ts-ignore Experimental property
   const userAgentData = window.navigator.userAgentData;
   const isMobile =
@@ -96,7 +96,7 @@ function AutocompleteComponent(): JSX.Element {
   // TODO Move to theme
   return (
     <span style={{color: '#ccc'}} spellCheck="false">
-      {suggestion} {isMobile ? '(SWIPE \u2B95)' : '(TAB)'}
+      {/* {suggestion} {isMobile ? '(SWIPE \u2B95)' : '(TAB)'} */}
     </span>
   );
 }

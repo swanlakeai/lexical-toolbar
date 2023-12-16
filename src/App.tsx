@@ -15,13 +15,13 @@ import * as React from 'react';
 
 import {isDevPlayground} from './appSettings';
 import {SettingsContext, useSettings} from './context/SettingsContext';
-import {SharedAutocompleteContext} from './context/SharedAutocompleteContext';
+// import {SharedAutocompleteContext} from './context/SharedAutocompleteContext';
 import {SharedHistoryContext} from './context/SharedHistoryContext';
 import Editor from './Editor';
-import logo from './images/logo.svg';
+// import logo from './images/logo.svg';
 import PlaygroundNodes from './nodes/PlaygroundNodes';
 import TestRecorderPlugin from './plugins/TestRecorderPlugin';
-import TypingPerfPlugin from './plugins/TypingPerfPlugin';
+// import TypingPerfPlugin from './plugins/TypingPerfPlugin';
 import Settings from './Settings';
 import PlaygroundEditorTheme from './themes/PlaygroundEditorTheme';
 
@@ -131,10 +131,10 @@ function App(): JSX.Element {
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <SharedHistoryContext>
-        <SharedAutocompleteContext>
+       
           <header>
             <a href="https://lexical.dev" target="_blank" rel="noopener">
-              <img src={logo} alt="Lexical Logo" />
+              {/* <img src={logo} alt="Lexical Logo" /> */}
             </a>
           </header>
           <div className="editor-shell">
@@ -142,8 +142,8 @@ function App(): JSX.Element {
           </div>
           <Settings />
           {isDevPlayground ? <TestRecorderPlugin /> : null}
-          {measureTypingPerf ? <TypingPerfPlugin /> : null}
-        </SharedAutocompleteContext>
+          {/* {measureTypingPerf ? <TypingPerfPlugin /> : null} */}
+  
       </SharedHistoryContext>
     </LexicalComposer>
   );

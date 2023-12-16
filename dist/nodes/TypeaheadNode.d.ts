@@ -1,6 +1,6 @@
 import type { Spread } from 'lexical';
 import { EditorConfig, SerializedTextNode, TextNode } from 'lexical';
-export type SerializedTypeaheadNode = Spread<{
+export declare type SerializedTypeaheadNode = Spread<{
     type: 'typeahead';
     version: 1;
 }, SerializedTextNode>;

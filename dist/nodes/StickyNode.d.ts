@@ -1,9 +1,8 @@
 /// <reference types="react" />
 import type { EditorConfig, LexicalEditor, LexicalNode, NodeKey, SerializedLexicalNode, Spread } from 'lexical';
-import './StickyNode.css';
 import { DecoratorNode } from 'lexical';
-type StickyNoteColor = 'pink' | 'yellow';
-export type SerializedStickyNode = Spread<{
+declare type StickyNoteColor = 'pink' | 'yellow';
+export declare type SerializedStickyNode = Spread<{
     xOffset: number;
     yOffset: number;
     color: StickyNoteColor;

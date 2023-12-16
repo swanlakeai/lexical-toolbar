@@ -15,7 +15,7 @@ import type {
   Spread,
 } from 'lexical';
 
-import './StickyNode.css';
+// import './StickyNode.css';
 
 import {
   CollaborationPlugin,
@@ -85,6 +85,8 @@ function StickyComponent({
     x: 0,
     y: 0,
   });
+  // const {yjsDocMap} = useCollaborationContext();
+  // const isCollab = yjsDocMap.get('main') !== undefined;
 
   useEffect(() => {
     const position = positioningRef.current;
@@ -97,6 +99,47 @@ function StickyComponent({
     }
   }, [x, y]);
 
+  // useLayoutEffect(() => {
+  //   const position = positioningRef.current;
+  //   const resizeObserver = new ResizeObserver((entries) => {
+  //     for (let i = 0; i < entries.length; i++) {
+  //       const entry = entries[i];
+  //       const {target} = entry;
+  //       position.rootElementRect = target.getBoundingClientRect();
+  //       const stickyContainer = stickyContainerRef.current;
+  //       if (stickyContainer !== null) {
+  //         positionSticky(stickyContainer, position);
+  //       }
+  //     }
+  //   });
+
+    // const removeRootListener = editor.registerRootListener(
+    //   (nextRootElem, prevRootElem) => {
+    //     if (prevRootElem !== null) {
+    //       resizeObserver.unobserve(prevRootElem);
+    //     }
+    //     if (nextRootElem !== null) {
+    //       resizeObserver.observe(nextRootElem);
+    //     }
+    //   },
+    // );
+
+    // const handleWindowResize = () => {
+    //   const rootElement = editor.getRootElement();
+    //   const stickyContainer = stickyContainerRef.current;
+    //   if (rootElement !== null && stickyContainer !== null) {
+    //     position.rootElementRect = rootElement.getBoundingClientRect();
+    //     positionSticky(stickyContainer, position);
+    //   }
+    // };
+
+    // window.addEventListener('resize', handleWindowResize);
+
+  //   return () => {
+  //     window.removeEventListener('resize', handleWindowResize);
+  //     removeRootListener();
+  //   };
+  // }, [editor]);
 
   useEffect(() => {
     const stickyContainer = stickyContainerRef.current;
@@ -205,18 +248,31 @@ function StickyComponent({
           title="Color">
           <i className="bucket" />
         </button>
-        <LexicalNestedComposer
+        {/* <LexicalNestedComposer
           initialEditor={caption}
           initialTheme={StickyEditorTheme}>
-  
+          {isCollab ? (
+            <CollaborationPlugin
+              id={caption.getKey()}
+              providerFactory={createWebsocketProvider}
+              shouldBootstrap={true}
+            />
+          ) : (
+            <HistoryPlugin externalHistoryState={historyState} />
+          )}
           <PlainTextPlugin
-            contentEditable={<ContentEditable className="StickyNode__contentEditable" />}
-            placeholder={<Placeholder className="StickyNode__placeholder">
-              What's up?
-            </Placeholder>} ErrorBoundary={undefined}            // TODO Remove after it's inherited from the parent (LexicalComposer)
-         
+            contentEditable={
+              <ContentEditable className="StickyNode__contentEditable" />
+            }
+            placeholder={
+              <Placeholder className="StickyNode__placeholder">
+                What's up?
+              </Placeholder>
+            }
+            // TODO Remove after it's inherited from the parent (LexicalComposer)
+            initialEditorState={null}
           />
-        </LexicalNestedComposer>
+        </LexicalNestedComposer> */}
       </div>
     </div>
   );

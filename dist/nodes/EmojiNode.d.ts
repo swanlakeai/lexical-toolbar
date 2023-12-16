@@ -1,6 +1,6 @@
 import type { EditorConfig, LexicalNode, NodeKey, SerializedTextNode, Spread } from 'lexical';
 import { TextNode } from 'lexical';
-export type SerializedEmojiNode = Spread<{
+export declare type SerializedEmojiNode = Spread<{
     className: string;
     type: 'emoji';
 }, SerializedTextNode>;

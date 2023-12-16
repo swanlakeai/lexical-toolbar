@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import type { EditorConfig, ElementFormatType, LexicalEditor, LexicalNode, NodeKey, Spread } from 'lexical';
 import { DecoratorBlockNode, SerializedDecoratorBlockNode } from '@lexical/react/LexicalDecoratorBlockNode';
-export type SerializedYouTubeNode = Spread<{
+export declare type SerializedYouTubeNode = Spread<{
     videoID: string;
     type: 'youtube';
     version: 1;

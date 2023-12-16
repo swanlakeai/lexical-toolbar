@@ -3,17 +3,19 @@
 	"compilerOptions": {
 		"outDir": "./dist",
 		"strict": true,
-		"module": "commonjs",
+	
 		"esModuleInterop": true,
 		// "target": "es6",
 		"moduleResolution": "node",
 		"declaration": true,
-
+		"target": "esnext", // or your desired target version
+		"module": "ES2015", // or "ESNext"
+		// other options...
 		"removeComments": true,
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
 		"allowSyntheticDefaultImports": true,
-		"target": "ES2021",
+	
 		"sourceMap": true,
 		"baseUrl": "./",
 		"incremental": true,
@@ -27,5 +29,5 @@
 		
 	},
 	"include": ["src/**/*.ts"],
-	"exclude": ["node_modules"]
+	"exclude": ["node_modules"],
 }

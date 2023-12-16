@@ -6,7 +6,7 @@
  *
  */
 
-import './KatexEquationAlterer.css';
+// import './KatexEquationAlterer.css';
 
 import * as React from 'react';
 import {useCallback, useState} from 'react';

@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import type { DOMConversionMap, DOMExportOutput, EditorConfig, LexicalEditor, LexicalNode, NodeKey, SerializedLexicalNode, Spread } from 'lexical';
 import { DecoratorNode } from 'lexical';
-export type SerializedExcalidrawNode = Spread<{
+export declare type SerializedExcalidrawNode = Spread<{
     data: string;
     type: 'excalidraw';
     version: 1;

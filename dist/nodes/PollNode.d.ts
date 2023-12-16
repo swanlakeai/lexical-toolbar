@@ -1,13 +1,12 @@
 /// <reference types="react" />
-import './PollNode.css';
 import { DecoratorNode, DOMConversionMap, DOMExportOutput, LexicalNode, NodeKey, SerializedLexicalNode, Spread } from 'lexical';
-type Options = ReadonlyArray<Option>;
-type Option = Readonly<{
+declare type Options = ReadonlyArray<Option>;
+declare type Option = Readonly<{
     text: string;
     uid: string;
     votes: Array<number>;
 }>;
-export type SerializedPollNode = Spread<{
+export declare type SerializedPollNode = Spread<{
     question: string;
     options: Options;
     type: 'poll';

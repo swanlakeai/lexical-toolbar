@@ -9,12 +9,12 @@
 import type {LexicalEditor} from 'lexical';
 
 import {$createCodeNode, $isCodeNode} from '@lexical/code';
-import {exportFile, importFile} from '@lexical/file';
+// import {exportFile, importFile} from '@lexical/file';
 import {
   $convertFromMarkdownString,
   $convertToMarkdownString,
 } from '@lexical/markdown';
-import {useCollaborationContext} from '@lexical/react/LexicalCollaborationPlugin';
+// import {useCollaborationContext} from '@lexical/react/LexicalCollaborationPlugin';
 import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
 import {mergeRegister} from '@lexical/utils';
 import {CONNECTED_COMMAND, TOGGLE_CONNECT_COMMAND} from '@lexical/yjs';
@@ -30,7 +30,7 @@ import {useCallback, useEffect, useState} from 'react';
 
 import useModal from '../hooks/useModal';
 import Button from '../ui/Button';
-import {PLAYGROUND_TRANSFORMERS} from './MarkdownTransformers';
+// import {PLAYGROUND_TRANSFORMERS} from './MarkdownTransformers';
 import {
   SPEECH_TO_TEXT_COMMAND,
   SUPPORT_SPEECH_RECOGNITION,
@@ -42,30 +42,30 @@ export default function ActionsPlugin({
   isRichText: boolean;
 }): JSX.Element {
   const [editor] = useLexicalComposerContext();
-  const [isReadOnly, setIsReadyOnly] = useState(() => editor.isReadOnly());
+  // const [isReadOnly, setIsReadyOnly] = useState(() => editor.isReadOnly());
   const [isSpeechToText, setIsSpeechToText] = useState(false);
   const [connected, setConnected] = useState(false);
   const [isEditorEmpty, setIsEditorEmpty] = useState(true);
   const [modal, showModal] = useModal();
-  const {yjsDocMap} = useCollaborationContext();
-  const isCollab = yjsDocMap.get('main') !== undefined;
+  // const {yjsDocMap} = useCollaborationContext();
+  // const isCollab = yjsDocMap.get('main') !== undefined;
 
-  useEffect(() => {
-    return mergeRegister(
-      editor.registerReadOnlyListener((readOnly) => {
-        setIsReadyOnly(readOnly);
-      }),
-      editor.registerCommand<boolean>(
-        CONNECTED_COMMAND,
-        (payload) => {
-          const isConnected = payload;
-          setConnected(isConnected);
-          return false;
-        },
-        COMMAND_PRIORITY_EDITOR,
-      ),
-    );
-  }, [editor]);
+  // useEffect(() => {
+  //   return mergeRegister(
+  //     editor.registerReadOnlyListener((readOnly) => {
+  //       setIsReadyOnly(readOnly);
+  //     }),
+  //     editor.registerCommand<boolean>(
+  //       CONNECTED_COMMAND,
+  //       (payload) => {
+  //         const isConnected = payload;
+  //         setConnected(isConnected);
+  //         return false;
+  //       },
+  //       COMMAND_PRIORITY_EDITOR,
+  //     ),
+  //   );
+  // }, [editor]);
 
   useEffect(() => {
     return editor.registerUpdateListener(() => {
@@ -92,17 +92,17 @@ export default function ActionsPlugin({
       const root = $getRoot();
       const firstChild = root.getFirstChild();
       if ($isCodeNode(firstChild) && firstChild.getLanguage() === 'markdown') {
-        $convertFromMarkdownString(
-          firstChild.getTextContent(),
-          PLAYGROUND_TRANSFORMERS,
-        );
+        // $convertFromMarkdownString(
+        //   firstChild.getTextContent(),
+        //   PLAYGROUND_TRANSFORMERS,
+        // );
       } else {
-        const markdown = $convertToMarkdownString(PLAYGROUND_TRANSFORMERS);
-        root
-          .clear()
-          .append(
-            $createCodeNode('markdown').append($createTextNode(markdown)),
-          );
+        // const markdown = $convertToMarkdownString(PLAYGROUND_TRANSFORMERS);
+        // root
+        //   .clear()
+        //   .append(
+        //     $createCodeNode('markdown').append($createTextNode(markdown)),
+        //   );
       }
       root.selectEnd();
     });
@@ -110,34 +110,34 @@ export default function ActionsPlugin({
 
   return (
     <div className="actions">
-      {SUPPORT_SPEECH_RECOGNITION && (
-        <button
-          onClick={() => {
-            editor.dispatchCommand<boolean>(
-              SPEECH_TO_TEXT_COMMAND,
-              !isSpeechToText,
-            );
-            setIsSpeechToText(!isSpeechToText);
-          }}
-          className={
-            'action-button action-button-mic ' +
-            (isSpeechToText ? 'active' : '')
-          }
-          title="Speech To Text"
-          aria-label={`${
-            isSpeechToText ? 'Enable' : 'Disable'
-          } speech to text`}>
-          <i className="mic" />
-        </button>
-      )}
-      <button
+      {/* {SUPPORT_SPEECH_RECOGNITION && (
+        // <button
+        //   onClick={() => {
+        //     editor.dispatchCommand<boolean>(
+        //       SPEECH_TO_TEXT_COMMAND,
+        //       !isSpeechToText,
+        //     );
+        //     setIsSpeechToText(!isSpeechToText);
+        //   }}
+        //   className={
+        //     'action-button action-button-mic ' +
+        //     (isSpeechToText ? 'active' : '')
+        //   }
+        //   title="Speech To Text"
+        //   aria-label={`${
+        //     isSpeechToText ? 'Enable' : 'Disable'
+        //   } speech to text`}>
+        //   <i className="mic" />
+        // </button>
+      )} */}
+      {/* <button
         className="action-button import"
         onClick={() => importFile(editor)}
         title="Import"
         aria-label="Import editor state from JSON">
         <i className="import" />
-      </button>
-      <button
+      </button> */}
+      {/* <button
         className="action-button export"
         onClick={() =>
           exportFile(editor, {
@@ -148,7 +148,7 @@ export default function ActionsPlugin({
         title="Export"
         aria-label="Export editor state to JSON">
         <i className="export" />
-      </button>
+      </button> */}
       <button
         className="action-button clear"
         disabled={isEditorEmpty}
@@ -161,7 +161,7 @@ export default function ActionsPlugin({
         aria-label="Clear editor contents">
         <i className="clear" />
       </button>
-      <button
+      {/* <button
         className={`action-button ${isReadOnly ? 'unlock' : 'lock'}`}
         onClick={() => {
           editor.setReadOnly(!editor.isReadOnly());
@@ -169,7 +169,7 @@ export default function ActionsPlugin({
         title="Read-Only Mode"
         aria-label={`${isReadOnly ? 'Unlock' : 'Lock'} read-only mode`}>
         <i className={isReadOnly ? 'unlock' : 'lock'} />
-      </button>
+      </button> */}
       <button
         className="action-button"
         onClick={handleMarkdownToggle}
@@ -177,7 +177,7 @@ export default function ActionsPlugin({
         aria-label="Convert from markdown">
         <i className="markdown" />
       </button>
-      {isCollab && (
+      {/* {isCollab && (
         <button
           className="action-button connect"
           onClick={() => {
@@ -191,7 +191,7 @@ export default function ActionsPlugin({
           } a collaborative editing server`}>
           <i className={connected ? 'disconnect' : 'connect'} />
         </button>
-      )}
+      )} */}
       {modal}
     </div>
   );
@@ -208,14 +208,14 @@ function ShowClearDialog({
     <>
       Are you sure you want to clear the editor?
       <div className="Modal__content">
-        <Button
+        {/* <Button
           onClick={() => {
             editor.dispatchCommand<void>(CLEAR_EDITOR_COMMAND, undefined);
             editor.focus();
             onClose();
           }}>
           Clear
-        </Button>{' '}
+        </Button>{' '} */}
         <Button
           onClick={() => {
             editor.focus();

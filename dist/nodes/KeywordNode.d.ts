@@ -1,6 +1,6 @@
 import type { EditorConfig, LexicalNode, SerializedTextNode, Spread } from 'lexical';
 import { TextNode } from 'lexical';
-export type SerializedKeywordNode = Spread<{
+export declare type SerializedKeywordNode = Spread<{
     type: 'keyword';
     version: 1;
 }, SerializedTextNode>;

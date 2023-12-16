@@ -1,6 +1,6 @@
 import type { HistoryState } from '@lexical/react/LexicalHistoryPlugin';
 import { ReactNode } from 'react';
-type ContextShape = {
+declare type ContextShape = {
     historyState?: HistoryState;
 };
 export declare const SharedHistoryContext: ({ children, }: {

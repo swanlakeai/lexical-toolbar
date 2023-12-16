@@ -14,7 +14,7 @@ import type {
   RangeSelection,
 } from 'lexical';
 
-import './ToolbarPlugin.css';
+// import './ToolbarPlugin.css';
 
 import {$createCodeNode, $isCodeNode} from '@lexical/code';
 import {$isLinkNode, TOGGLE_LINK_COMMAND} from '@lexical/link';
@@ -41,6 +41,7 @@ import {
   $isParentElementRTL,
   $patchStyleText,
   $selectAll,
+  // $wrapLeafNodesInElements,
 } from '@lexical/selection';
 import {INSERT_TABLE_COMMAND} from '@lexical/table';
 import {
@@ -76,8 +77,6 @@ import {createPortal} from 'react-dom';
 import {IS_APPLE} from '../shared/src/environment';
 
 import useModal from '../hooks/useModal';
-import catTypingGif from '../images/cat-typing.gif';
-import yellowFlowerImage from '../images/yellow-flower.jpg';
 import {$createStickyNode} from '../nodes/StickyNode';
 import Button from '../ui/Button';
 import ColorPicker from '../ui/ColorPicker';
@@ -224,7 +223,7 @@ function FloatingLinkEditor({editor}: {editor: LexicalEditor}): JSX.Element {
       }
 
       positionEditorElement(editorElem, rect, rootElement);
-      setLastSelection(selection);
+      // setLastSelection(selection);
     } else if (!activeElement || activeElement.className !== 'link-input') {
       if (rootElement !== null) {
         positionEditorElement(editorElem, null, rootElement);
@@ -435,7 +434,7 @@ function InsertImageDialog({
     <>
       {!mode && (
         <div className="ToolbarPlugin__dialogButtonsList">
-          <Button
+          {/* <Button
             data-test-id="image-modal-option-sample"
             onClick={() =>
               onClick({
@@ -444,7 +443,7 @@ function InsertImageDialog({
               })
             }>
             Sample
-          </Button>
+          </Button> */}
           <Button
             data-test-id="image-modal-option-url"
             onClick={() => setMode('url')}>
@@ -1259,7 +1258,7 @@ export default function ToolbarPlugin(): JSX.Element {
               <i className="icon image" />
               <span className="text">Image</span>
             </DropDownItem>
-            <DropDownItem
+            {/* <DropDownItem
               onClick={() =>
                 insertGifOnClick({
                   altText: 'Cat typing on a laptop',
@@ -1269,7 +1268,7 @@ export default function ToolbarPlugin(): JSX.Element {
               className="item">
               <i className="icon gif" />
               <span className="text">GIF</span>
-            </DropDownItem>
+            </DropDownItem> */}
             <DropDownItem
               onClick={() => {
                 activeEditor.dispatchCommand(

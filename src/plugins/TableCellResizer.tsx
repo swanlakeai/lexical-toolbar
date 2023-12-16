@@ -8,7 +8,7 @@
 import type {Cell} from '@lexical/table';
 import type {LexicalEditor} from 'lexical';
 
-import './TableCellResizer.css';
+// import './TableCellResizer.css';
 
 import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
 import {
@@ -22,7 +22,7 @@ import {
 import {
   $getNearestNodeFromDOMNode,
   $getSelection,
-  $isGridSelection,
+  // $isGridSelection,
   COMMAND_PRIORITY_HIGH,
   SELECTION_CHANGE_COMMAND,
 } from 'lexical';
@@ -67,11 +67,11 @@ function TableCellResizer({editor}: {editor: LexicalEditor}): JSX.Element {
       SELECTION_CHANGE_COMMAND,
       (payload) => {
         const selection = $getSelection();
-        const isGridSelection = $isGridSelection(selection);
+        // const isGridSelection = $isGridSelection(selection);
 
-        if (isSelectingGrid !== isGridSelection) {
-          updateIsSelectingGrid(isGridSelection);
-        }
+        // if (isSelectingGrid !== isGridSelection) {
+        //   updateIsSelectingGrid(isGridSelection);
+        // }
 
         return false;
       },

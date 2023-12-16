@@ -1,6 +1,5 @@
 /// <reference types="react" />
 import type { DOMConversionMap, DOMExportOutput, EditorConfig, LexicalEditor, LexicalNode, NodeKey, SerializedEditor, SerializedLexicalNode, Spread } from 'lexical';
-import './ImageNode.css';
 import { DecoratorNode } from 'lexical';
 export interface ImagePayload {
     altText: string;
@@ -12,7 +11,7 @@ export interface ImagePayload {
     src: string;
     width?: number;
 }
-export type SerializedImageNode = Spread<{
+export declare type SerializedImageNode = Spread<{
     altText: string;
     caption: SerializedEditor;
     height?: number;

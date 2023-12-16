@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import type { Spread } from 'lexical';
 import { DecoratorNode, EditorConfig, NodeKey, SerializedLexicalNode } from 'lexical';
-export type SerializedAutocompleteNode = Spread<{
+export declare type SerializedAutocompleteNode = Spread<{
     type: 'autocomplete';
     version: 1;
     uuid: string;

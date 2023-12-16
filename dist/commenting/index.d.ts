@@ -1,20 +1,20 @@
 import type { LexicalEditor } from 'lexical';
 import { WebsocketProvider } from 'y-websocket';
 import { Array as YArray, Map as YMap } from 'yjs';
-export type Comment = {
+export declare type Comment = {
     author: string;
     content: string;
     id: string;
     timeStamp: number;
     type: 'comment';
 };
-export type Thread = {
+export declare type Thread = {
     comments: Array<Comment>;
     id: string;
     quote: string;
     type: 'thread';
 };
-export type Comments = Array<Thread | Comment>;
+export declare type Comments = Array<Thread | Comment>;
 export declare function createComment(content: string, author: string, id?: string, timeStamp?: number): Comment;
 export declare function createThread(quote: string, comments: Array<Comment>, id?: string): Thread;
 export declare class CommentStore {

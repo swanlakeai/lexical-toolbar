@@ -22,7 +22,7 @@ import type {
   Spread,
 } from 'lexical';
 
-import './ImageNode.css';
+// import './ImageNode.css';
 
 import {
   CollaborationPlugin,
@@ -58,7 +58,7 @@ import ImagesPlugin from '../plugins/ImagesPlugin';
 import KeywordsPlugin from '../plugins/KeywordsPlugin';
 import MentionsPlugin from '../plugins/MentionsPlugin';
 import TableCellActionMenuPlugin from '../plugins/TableActionMenuPlugin';
-import TreeViewPlugin from '../plugins/TreeViewPlugin';
+// import TreeViewPlugin from '../plugins/TreeViewPlugin';
 import ContentEditable from '../ui/ContentEditable';
 import ImageResizer from '../ui/ImageResizer';
 import Placeholder from '../ui/Placeholder';
@@ -157,8 +157,9 @@ function ImageComponent({
   const [isSelected, setSelected, clearSelection] =
     useLexicalNodeSelection(nodeKey);
   const [isResizing, setIsResizing] = useState<boolean>(false);
+  // const {yjsDocMap} = useCollaborationContext();
   const [editor] = useLexicalComposerContext();
-
+  // const isCollab = yjsDocMap.get('main') !== undefined;
   const [selection, setSelection] = useState<
     RangeSelection | NodeSelection | GridSelection | null
   >(null);
@@ -181,9 +182,9 @@ function ImageComponent({
 
   useEffect(() => {
     return mergeRegister(
-      editor.registerUpdateListener(({editorState}) => {
-   
-      }),
+      // editor.registerUpdateListener(({editorState}) => {
+      //   setSelection(editorState.read(() => $getSelection()));
+      // }),
       editor.registerCommand<MouseEvent>(
         CLICK_COMMAND,
         (payload) => {
@@ -288,15 +289,28 @@ function ImageComponent({
               <EmojisPlugin />
               <HashtagPlugin />
               <KeywordsPlugin />
-             
-              <RichTextPlugin
-                contentEditable={<ContentEditable className="ImageNode__contentEditable" />}
-                placeholder={<Placeholder className="ImageNode__placeholder">
-                  Enter a caption...
-                </Placeholder>} ErrorBoundary={undefined}                // TODO Remove after it's inherited from the parent (LexicalComposer)
-               
-              />
-              {showNestedEditorTreeView === true ? <TreeViewPlugin /> : null}
+              {/* {isCollab ? (
+                <CollaborationPlugin
+                  id={caption.getKey()}
+                  providerFactory={createWebsocketProvider}
+                  shouldBootstrap={true}
+                />
+              ) : (
+                <HistoryPlugin externalHistoryState={historyState} />
+              )} */}
+              {/* <RichTextPlugin
+                contentEditable={
+                  <ContentEditable className="ImageNode__contentEditable" />
+                }
+                placeholder={
+                  <Placeholder className="ImageNode__placeholder">
+                    Enter a caption...
+                  </Placeholder>
+                }
+                // TODO Remove after it's inherited from the parent (LexicalComposer)
+                initialEditorState={null}
+              /> */}
+              {/* {showNestedEditorTreeView === true ? <TreeViewPlugin /> : null} */}
             </LexicalNestedComposer>
           </div>
         )}

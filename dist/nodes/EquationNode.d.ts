@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import type { EditorConfig, LexicalNode, NodeKey, SerializedLexicalNode, Spread } from 'lexical';
 import { DecoratorNode } from 'lexical';
-export type SerializedEquationNode = Spread<{
+export declare type SerializedEquationNode = Spread<{
     type: 'equation';
     equation: string;
     inline: boolean;

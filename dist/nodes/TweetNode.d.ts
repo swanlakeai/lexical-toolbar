@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import type { DOMConversionMap, DOMExportOutput, EditorConfig, ElementFormatType, LexicalEditor, LexicalNode, NodeKey, Spread } from 'lexical';
 import { DecoratorBlockNode, SerializedDecoratorBlockNode } from '@lexical/react/LexicalDecoratorBlockNode';
-export type SerializedTweetNode = Spread<{
+export declare type SerializedTweetNode = Spread<{
     id: string;
     type: 'tweet';
     version: 1;

@@ -45,185 +45,182 @@ import {$createEquationNode, $isEquationNode} from '../nodes/EquationNode';
 import {$createImageNode, $isImageNode} from '../nodes/ImageNode';
 import {$createTweetNode, $isTweetNode} from '../nodes/TweetNode';
 
-export const HR: ElementTransformer = {
-  export: (node: LexicalNode) => {
-    return $isHorizontalRuleNode(node) ? '***' : null;
-  },
-  regExp: /^(---|\*\*\*|___)\s?$/,
-  replace: (parentNode, _1, _2, isImport) => {
-    const line = $createHorizontalRuleNode();
+// export const HR: ElementTransformer = {
+//   export: (node: LexicalNode) => {
+//     return $isHorizontalRuleNode(node) ? '***' : null;
+//   },
+//   regExp: /^(---|\*\*\*|___)\s?$/,
+//   replace: (parentNode, _1, _2, isImport) => {
+//     const line = $createHorizontalRuleNode();
 
-    // TODO: Get rid of isImport flag
-    if (isImport || parentNode.getNextSibling() != null) {
-      parentNode.replace(line);
-    } else {
-      parentNode.insertBefore(line);
-    }
+//     // TODO: Get rid of isImport flag
+//     if (isImport || parentNode.getNextSibling() != null) {
+//       parentNode.replace(line);
+//     } else {
+//       parentNode.insertBefore(line);
+//     }
 
-    line.selectNext();
-  },
-  type: 'element',
-  dependencies: []
-};
+//     line.selectNext();
+//   },
+//   type: 'element',
+// };
 
-export const IMAGE: TextMatchTransformer = {
-  export: (node, exportChildren, exportFormat) => {
-    if (!$isImageNode(node)) {
-      return null;
-    }
+// export const IMAGE: TextMatchTransformer = {
+//   export: (node, exportChildren, exportFormat) => {
+//     if (!$isImageNode(node)) {
+//       return null;
+//     }
 
-    return `![${node.getAltText()}](${node.getSrc()})`;
-  },
-  importRegExp: /!(?:\[([^[]*)\])(?:\(([^(]+)\))/,
-  regExp: /!(?:\[([^[]*)\])(?:\(([^(]+)\))$/,
-  replace: (textNode, match) => {
-    const [, altText, src] = match;
-    const imageNode = $createImageNode({
-      altText,
-      maxWidth: 800,
-      src,
-    });
-    textNode.replace(imageNode);
-  },
-  trigger: ')',
-  type: 'text-match',
-  dependencies: []
-};
+//     return `![${node.getAltText()}](${node.getSrc()})`;
+//   },
+//   importRegExp: /!(?:\[([^[]*)\])(?:\(([^(]+)\))/,
+//   regExp: /!(?:\[([^[]*)\])(?:\(([^(]+)\))$/,
+//   replace: (textNode, match) => {
+//     const [, altText, src] = match;
+//     const imageNode = $createImageNode({
+//       altText,
+//       maxWidth: 800,
+//       src,
+//     });
+//     textNode.replace(imageNode);
+//   },
+//   trigger: ')',
+//   type: 'text-match',
+// };
 
-export const EQUATION: TextMatchTransformer = {
-  export: (node, exportChildren, exportFormat) => {
-    if (!$isEquationNode(node)) {
-      return null;
-    }
+// export const EQUATION: TextMatchTransformer = {
+//   export: (node, exportChildren, exportFormat) => {
+//     if (!$isEquationNode(node)) {
+//       return null;
+//     }
 
-    return `$${node.getEquation()}$`;
-  },
-  importRegExp: /\$([^$].+?)\$/,
-  regExp: /\$([^$].+?)\$$/,
-  replace: (textNode, match) => {
-    const [, equation] = match;
-    const equationNode = $createEquationNode(equation, true);
-    textNode.replace(equationNode);
-  },
-  trigger: '$',
-  type: 'text-match',
-  dependencies: []
-};
+//     return `$${node.getEquation()}$`;
+//   },
+//   importRegExp: /\$([^$].+?)\$/,
+//   regExp: /\$([^$].+?)\$$/,
+//   replace: (textNode, match) => {
+//     const [, equation] = match;
+//     const equationNode = $createEquationNode(equation, true);
+//     textNode.replace(equationNode);
+//   },
+//   trigger: '$',
+//   type: 'text-match',
+// };
 
-export const TWEET: ElementTransformer = {
-  export: (node) => {
-    if (!$isTweetNode(node)) {
-      return null;
-    }
+// export const TWEET: ElementTransformer = {
+//   export: (node) => {
+//     if (!$isTweetNode(node)) {
+//       return null;
+//     }
 
-    return `<tweet id="${node.getId()}" />`;
-  },
-  regExp: /<tweet id="([^"]+?)"\s?\/>\s?$/,
-  replace: (textNode, _1, match) => {
-    const [, id] = match;
-    const tweetNode = $createTweetNode(id);
-    textNode.replace(tweetNode);
-  },
-  type: 'element',
-  dependencies: []
-};
+//     return `<tweet id="${node.getId()}" />`;
+//   },
+//   regExp: /<tweet id="([^"]+?)"\s?\/>\s?$/,
+//   replace: (textNode, _1, match) => {
+//     const [, id] = match;
+//     const tweetNode = $createTweetNode(id);
+//     textNode.replace(tweetNode);
+//   },
+//   type: 'element',
+// };
 
 // Very primitive table setup
 const TABLE_ROW_REG_EXP = /^(?:\|)(.+)(?:\|)\s?$/;
 
-export const TABLE: ElementTransformer = {
-  export: (
-    node: LexicalNode,
-    exportChildren: (elementNode: ElementNode) => string
-  ) => {
-    if (!$isTableNode(node)) {
-      return null;
-    }
+// export const TABLE: ElementTransformer = {
+//   export: (
+//     node: LexicalNode,
+//     exportChildren: (elementNode: ElementNode) => string,
+//   ) => {
+//     if (!$isTableNode(node)) {
+//       return null;
+//     }
 
-    const output = [];
+//     const output = [];
 
-    for (const row of node.getChildren()) {
-      const rowOutput = [];
+//     for (const row of node.getChildren()) {
+//       const rowOutput = [];
 
-      if ($isTableRowNode(row)) {
-        for (const cell of row.getChildren()) {
-          // It's TableCellNode (hence ElementNode) so it's just to make flow happy
-          if ($isElementNode(cell)) {
-            rowOutput.push(exportChildren(cell));
-          }
-        }
-      }
+//       if ($isTableRowNode(row)) {
+//         for (const cell of row.getChildren()) {
+//           // It's TableCellNode (hence ElementNode) so it's just to make flow happy
+//           if ($isElementNode(cell)) {
+//             rowOutput.push(exportChildren(cell));
+//           }
+//         }
+//       }
 
-      output.push(`| ${rowOutput.join(' | ')} |`);
-    }
+//       output.push(`| ${rowOutput.join(' | ')} |`);
+//     }
 
-    return output.join('\n');
-  },
-  regExp: TABLE_ROW_REG_EXP,
-  replace: (parentNode, _1, match) => {
-    const matchCells = mapToTableCells(match[0]);
+//     return output.join('\n');
+//   },
+//   regExp: TABLE_ROW_REG_EXP,
+//   replace: (parentNode, _1, match) => {
+//     const matchCells = mapToTableCells(match[0]);
 
-    if (matchCells == null) {
-      return;
-    }
+//     if (matchCells == null) {
+//       return;
+//     }
 
-    const rows = [matchCells];
-    let sibling = parentNode.getPreviousSibling();
-    let maxCells = matchCells.length;
+//     const rows = [matchCells];
+//     let sibling = parentNode.getPreviousSibling();
+//     let maxCells = matchCells.length;
 
-    while (sibling) {
-      if (!$isParagraphNode(sibling)) {
-        break;
-      }
+//     while (sibling) {
+//       if (!$isParagraphNode(sibling)) {
+//         break;
+//       }
 
-      if (sibling.getChildrenSize() !== 1) {
-        break;
-      }
+//       if (sibling.getChildrenSize() !== 1) {
+//         break;
+//       }
 
-      const firstChild = sibling.getFirstChild();
+//       const firstChild = sibling.getFirstChild();
 
-      if (!$isTextNode(firstChild)) {
-        break;
-      }
+//       if (!$isTextNode(firstChild)) {
+//         break;
+//       }
 
-      const cells = mapToTableCells(firstChild.getTextContent());
+//       const cells = mapToTableCells(firstChild.getTextContent());
 
-      if (cells == null) {
-        break;
-      }
+//       if (cells == null) {
+//         break;
+//       }
 
-      maxCells = Math.max(maxCells, cells.length);
-      rows.unshift(cells);
-      const previousSibling = sibling.getPreviousSibling();
-      sibling.remove();
-      sibling = previousSibling;
-    }
+//       maxCells = Math.max(maxCells, cells.length);
+//       rows.unshift(cells);
+//       const previousSibling = sibling.getPreviousSibling();
+//       sibling.remove();
+//       sibling = previousSibling;
+//     }
 
-    const table = $createTableNode();
+//     const table = $createTableNode();
 
-    for (const cells of rows) {
-      const tableRow = $createTableRowNode();
-      table.append(tableRow);
+//     for (const cells of rows) {
+//       const tableRow = $createTableRowNode();
+//       table.append(tableRow);
 
-      for (let i = 0; i < maxCells; i++) {
-        tableRow.append(i < cells.length ? cells[i] : createTableCell(null));
-      }
-    }
+//       for (let i = 0; i < maxCells; i++) {
+//         tableRow.append(i < cells.length ? cells[i] : createTableCell(null));
+//       }
+//     }
 
-    const previousSibling = parentNode.getPreviousSibling();
-    if ($isTableNode(previousSibling) &&
-      getTableColumnsSize(previousSibling) === maxCells) {
-      previousSibling.append(...table.getChildren());
-      parentNode.remove();
-    } else {
-      parentNode.replace(table);
-    }
+//     const previousSibling = parentNode.getPreviousSibling();
+//     if (
+//       $isTableNode(previousSibling) &&
+//       getTableColumnsSize(previousSibling) === maxCells
+//     ) {
+//       previousSibling.append(...table.getChildren());
+//       parentNode.remove();
+//     } else {
+//       parentNode.replace(table);
+//     }
 
-    table.selectEnd();
-  },
-  type: 'element',
-  dependencies: []
-};
+//     table.selectEnd();
+//   },
+//   type: 'element',
+// };
 
 function getTableColumnsSize(table: TableNode) {
   const row = table.getFirstChild();
@@ -257,14 +254,14 @@ const mapToTableCells = (textContent: string): Array<TableCellNode> | null => {
   return match[1].split('|').map((text) => createTableCell(text));
 };
 
-export const PLAYGROUND_TRANSFORMERS: Array<Transformer> = [
-  TABLE,
-  HR,
-  IMAGE,
-  EQUATION,
-  TWEET,
-  CHECK_LIST,
-  ...ELEMENT_TRANSFORMERS,
-  ...TEXT_FORMAT_TRANSFORMERS,
-  ...TEXT_MATCH_TRANSFORMERS,
-];
+// export const PLAYGROUND_TRANSFORMERS: Array<Transformer> = [
+//   TABLE,
+//   HR,
+//   IMAGE,
+//   EQUATION,
+//   TWEET,
+//   CHECK_LIST,
+//   ...ELEMENT_TRANSFORMERS,
+//   ...TEXT_FORMAT_TRANSFORMERS,
+//   ...TEXT_MATCH_TRANSFORMERS,
+// ];

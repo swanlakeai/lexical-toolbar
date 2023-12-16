@@ -335,7 +335,7 @@ ${steps.map(formatStep).join(`\n`)}
               return;
             }
           }
-          previousSelectionRef.current = currentSelection;
+          // previousSelectionRef.current = currentSelection;
         }
         skipNextSelectionChangeRef.current = false;
         const testContent = generateTestContent();

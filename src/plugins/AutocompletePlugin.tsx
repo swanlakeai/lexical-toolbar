@@ -29,7 +29,7 @@ import {
 } from 'lexical';
 import {useCallback, useEffect} from 'react';
 
-import {useSharedAutocompleteContext} from '../context/SharedAutocompleteContext';
+// import {useSharedAutocompleteContext} from '../context/SharedAutocompleteContext';
 import {
   $createAutocompleteNode,
   AutocompleteNode,
@@ -85,7 +85,7 @@ function useQuery(): (searchText: string) => SearchPromise {
 
 export default function AutocompletePlugin(): JSX.Element | null {
   const [editor] = useLexicalComposerContext();
-  const [, setSuggestion] = useSharedAutocompleteContext();
+  // const [, setSuggestion] = useSharedAutocompleteContext();
   const query = useQuery();
 
   useEffect(() => {
@@ -108,7 +108,7 @@ export default function AutocompletePlugin(): JSX.Element | null {
       }
       lastMatch = null;
       lastSuggestion = null;
-      setSuggestion(null);
+      // setSuggestion(null);
     }
     function updateAsyncSuggestion(
       refSearchPromise: SearchPromise,
@@ -118,28 +118,28 @@ export default function AutocompletePlugin(): JSX.Element | null {
         // Outdated or no suggestion
         return;
       }
-      // editor.update(
-      //   () => {
-      //     const selection = $getSelection();
-      //     // const [hasMatch, match] = $search(selection);
-      //     if (
-      //       !hasMatch ||
-      //       match !== lastMatch ||
-      //       !$isRangeSelection(selection)
-      //     ) {
-      //       // Outdated
-      //       return;
-      //     }
-      //     const selectionCopy = selection.clone();
-      //     const node = $createAutocompleteNode(uuid);
-      //     autocompleteNodeKey = node.getKey();
-      //     selection.insertNodes([node]);
-      //     $setSelection(selectionCopy);
-      //     lastSuggestion = newSuggestion;
-      //     setSuggestion(newSuggestion);
-      //   },
-      //   {tag: 'history-merge'},
-      // );
+      editor.update(
+        () => {
+          const selection = $getSelection();
+          // const [hasMatch, match] = $search(selection);
+          // if (
+          //   !hasMatch ||
+          //   match !== lastMatch ||
+          //   !$isRangeSelection(selection)
+          // ) {
+          //   // Outdated
+          //   return;
+          // }
+          // const selectionCopy = selection.clone();
+          // const node = $createAutocompleteNode(uuid);
+          // autocompleteNodeKey = node.getKey();
+          // selection.insertNodes([node]);
+          // $setSelection(selectionCopy);
+          lastSuggestion = newSuggestion;
+          // setSuggestion(newSuggestion);
+        },
+        {tag: 'history-merge'},
+      );
     }
 
     function handleAutocompleteNodeTransform(node: AutocompleteNode) {
@@ -149,31 +149,31 @@ export default function AutocompletePlugin(): JSX.Element | null {
         $clearSuggestion();
       }
     }
-    // function handleUpdate() {
-    //   editor.update(() => {
-    //     const selection = $getSelection();
-    //     // const [hasMatch, match] = $search(selection);
-    //     if (!hasMatch) {
-    //       $clearSuggestion();
-    //       return;
-    //     }
-    //     if (match === lastMatch) {
-    //       return;
-    //     }
-    //     $clearSuggestion();
-    //     searchPromise = query(match);
-    //     searchPromise.promise
-    //       .then((newSuggestion) => {
-    //         if (searchPromise !== null) {
-    //           updateAsyncSuggestion(searchPromise, newSuggestion);
-    //         }
-    //       })
-    //       .catch((e) => {
-    //         console.error(e);
-    //       });
-    //     lastMatch = match;
-    //   });
-    // }
+    function handleUpdate() {
+      editor.update(() => {
+        const selection = $getSelection();
+        // const [hasMatch, match] = $search(selection);
+        // if (!hasMatch) {
+        //   $clearSuggestion();
+        //   return;
+        // }
+        // if (match === lastMatch) {
+        //   return;
+        // }
+        $clearSuggestion();
+        // searchPromise = query(match);
+        // searchPromise.promise
+        //   .then((newSuggestion) => {
+        //     if (searchPromise !== null) {
+        //       updateAsyncSuggestion(searchPromise, newSuggestion);
+        //     }
+        //   })
+        //   .catch((e) => {
+        //     console.error(e);
+        //   });
+        // lastMatch = match;
+      });
+    }
     function $handleAutocompleteIntent(): boolean {
       if (lastSuggestion === null || autocompleteNodeKey === null) {
         return false;
@@ -215,7 +215,7 @@ export default function AutocompletePlugin(): JSX.Element | null {
         AutocompleteNode,
         handleAutocompleteNodeTransform,
       ),
-      // editor.registerUpdateListener(handleUpdate),
+      editor.registerUpdateListener(handleUpdate),
       editor.registerCommand(
         KEY_TAB_COMMAND,
         $handleKeypressCommand,
@@ -231,7 +231,7 @@ export default function AutocompletePlugin(): JSX.Element | null {
         : []),
       unmountSuggestion,
     );
-  }, [editor, query, setSuggestion]);
+  }, [editor, query]);
 
   return null;
 }

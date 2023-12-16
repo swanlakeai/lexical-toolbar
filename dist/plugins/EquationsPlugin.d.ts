@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import type { LexicalCommand } from 'lexical';
 import 'katex/dist/katex.css';
-type CommandPayload = {
+declare type CommandPayload = {
     equation: string;
     inline: boolean;
 };
